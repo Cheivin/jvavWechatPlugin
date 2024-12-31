@@ -1,5 +1,15 @@
 # jvav群小助手java插件开发
 
+## 安装
+
+```xml
+<dependency>
+    <groupId>io.github.cheivin</groupId>
+    <artifactId>jvavwechatplugin</artifactId>
+    <version>1.0</version>
+</dependency>
+```
+
 ### mqtt协议客户端示例
 
 ```java
