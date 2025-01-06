@@ -6,7 +6,7 @@
 <dependency>
     <groupId>io.github.cheivin</groupId>
     <artifactId>jvavwechatplugin</artifactId>
-    <version>1.0</version>
+    <version>1.0.1</version>
 </dependency>
 ```
 
