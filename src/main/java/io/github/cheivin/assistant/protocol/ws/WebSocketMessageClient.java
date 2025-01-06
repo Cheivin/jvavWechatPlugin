@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.cheivin.assistant.IMessageHandler;
 import io.github.cheivin.assistant.IMessageSender;
 import io.github.cheivin.assistant.message.Message;
+import io.github.cheivin.assistant.protocol.IPluginClient;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
 
@@ -16,7 +17,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class WebSocketMessageClient extends WebSocketClient {
+public class WebSocketMessageClient extends WebSocketClient implements IPluginClient {
     private final ScheduledExecutorService reconnectTask = Executors.newSingleThreadScheduledExecutor();
     private final ObjectMapper mapper = new ObjectMapper()
             .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);

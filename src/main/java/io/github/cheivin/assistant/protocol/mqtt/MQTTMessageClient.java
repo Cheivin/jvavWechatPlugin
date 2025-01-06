@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.cheivin.assistant.IMessageHandler;
 import io.github.cheivin.assistant.IMessageSender;
 import io.github.cheivin.assistant.message.Message;
+import io.github.cheivin.assistant.protocol.IPluginClient;
 import org.eclipse.paho.mqttv5.client.IMqttMessageListener;
 import org.eclipse.paho.mqttv5.client.MqttClient;
 import org.eclipse.paho.mqttv5.client.MqttConnectionOptions;
@@ -16,7 +17,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.time.Duration;
 
-public class MQTTMessageClient {
+public class MQTTMessageClient implements IPluginClient {
     private final static String TOPIC = "message";
     private final MqttClient client;
     private final ObjectMapper mapper = new ObjectMapper()
