@@ -107,7 +107,7 @@ import java.util.concurrent.CountDownLatch;
 
 public class WebSocketMessageListenerTest {
     public static void main(String[] args) throws InterruptedException {
-        WebSocketMessageClient client = new WebSocketMessageClient("tcp://127.0.0.1:8080", "username", "password");
+        WebSocketMessageClient client = new WebSocketMessageClient("ws://127.0.0.1:8080", "username", "password");
         ExampleHandler handler = new ExampleHandler().addPlugin(new AbstractPluginHandler(client.getSender()) {
             @Override
             public List<String> getCommands() {

@@ -1,21 +1,23 @@
 package io.github.cheivin.assistant.protocol.ws;
 
+import java.net.URI;
+import java.time.Duration;
+import java.util.Base64;
+import java.util.Map;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
+import org.java_websocket.client.WebSocketClient;
+import org.java_websocket.handshake.ServerHandshake;
+
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import io.github.cheivin.assistant.IMessageHandler;
 import io.github.cheivin.assistant.IMessageSender;
 import io.github.cheivin.assistant.message.Message;
 import io.github.cheivin.assistant.protocol.IPluginClient;
-import org.java_websocket.client.WebSocketClient;
-import org.java_websocket.handshake.ServerHandshake;
-
-import java.net.URI;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-import java.time.Duration;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 public class WebSocketMessageClient extends WebSocketClient implements IPluginClient {
     private final ScheduledExecutorService reconnectTask = Executors.newSingleThreadScheduledExecutor();
@@ -24,7 +26,8 @@ public class WebSocketMessageClient extends WebSocketClient implements IPluginCl
     private IMessageHandler handler;
 
     public WebSocketMessageClient(String serverUri, String username, String password) {
-        super(URI.create(String.format("%s?username=%s&password=%s", serverUri, URLEncoder.encode(username, StandardCharsets.UTF_8), URLEncoder.encode(password, StandardCharsets.UTF_8))));
+        super(URI.create(serverUri), Map.of("Authorization", String.format("Basic %s", Base64.getEncoder()
+                .encodeToString(String.format("%s:%s", username, password).getBytes()))));
     }
 
     @Override
