@@ -7,6 +7,7 @@ public class BaseMessage {
     public String groupName;
     public String uid;
     public String username;
+    private String wechatName;
     public long time;
 
 
@@ -64,6 +65,14 @@ public class BaseMessage {
 
     public void setTime(long time) {
         this.time = time;
+    }
+
+    public String getWechatName() {
+        return wechatName;
+    }
+
+    public void setWechatName(String wechatName) {
+        this.wechatName = wechatName;
     }
 
 }
