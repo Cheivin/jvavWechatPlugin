@@ -1,71 +1,52 @@
 package io.github.cheivin.assistant.plugin;
 
 
+import io.github.cheivin.assistant.message.BaseMessage;
 import io.github.cheivin.assistant.message.CommandMessage;
+import io.github.cheivin.assistant.message.ext.At;
+import io.github.cheivin.assistant.message.ext.Quote;
 
 import java.util.Optional;
 
-public class PluginRequest {
-    private String msgID;
-    private String uid;
-    private String username;
-    private String gid;
-    private String groupName;
-    private String message;
-    private int msgType;
-    private long time;
+public class PluginRequest extends BaseMessage {
+    /**
+     * 命令
+     */
     private String command;
+    /**
+     * 参数
+     */
+    private String message;
+    /**
+     * 被艾特的用户,命令中的offset需要-1
+     */
+    private At[] ates;
+    /**
+     * 引用消息
+     */
+    private Quote quote;
 
     public PluginRequest(String command, String parameters, CommandMessage message) {
         this.msgID = message.getMsgID();
-        this.uid = message.getUid();
-        this.username = message.getUsername();
+        this.msgType = message.getMsgType();
         this.gid = message.getGid();
         this.groupName = message.getGroupName();
-        this.message = Optional.ofNullable(parameters).orElse("").trim();
-        this.msgType = message.getMsgType();
+        this.uid = message.getUid();
+        this.username = message.getUsername();
+        this.wechatName = message.getWechatName();
         this.time = message.getTime();
+        this.message = Optional.ofNullable(parameters).orElse("").trim();
         this.command = command;
+        this.ates = message.getAtes();
+        this.quote = message.getQuote();
     }
 
-    public String getMsgID() {
-        return msgID;
+    public String getCommand() {
+        return command;
     }
 
-    public void setMsgID(String msgID) {
-        this.msgID = msgID;
-    }
-
-    public String getUid() {
-        return uid;
-    }
-
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getGid() {
-        return gid;
-    }
-
-    public void setGid(String gid) {
-        this.gid = gid;
-    }
-
-    public String getGroupName() {
-        return groupName;
-    }
-
-    public void setGroupName(String groupName) {
-        this.groupName = groupName;
+    public void setCommand(String command) {
+        this.command = command;
     }
 
     public String getMessage() {
@@ -76,27 +57,19 @@ public class PluginRequest {
         this.message = message;
     }
 
-    public int getMsgType() {
-        return msgType;
+    public At[] getAtes() {
+        return ates;
     }
 
-    public void setMsgType(int msgType) {
-        this.msgType = msgType;
+    public void setAtes(At[] ates) {
+        this.ates = ates;
     }
 
-    public long getTime() {
-        return time;
+    public Quote getQuote() {
+        return quote;
     }
 
-    public void setTime(long time) {
-        this.time = time;
-    }
-
-    public String getCommand() {
-        return command;
-    }
-
-    public void setCommand(String command) {
-        this.command = command;
+    public void setQuote(Quote quote) {
+        this.quote = quote;
     }
 }

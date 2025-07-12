@@ -6,7 +6,7 @@ public class SendMessageParam {
      */
     private String gid;
     /**
-     * 回复类型 -1:不处理,0:不回复,1:文本,2:图片,3:视频,4:文件
+     * 回复类型 1:文本,2:图片,3:视频,4:文件
      */
     private int type;
     /**
@@ -18,9 +18,10 @@ public class SendMessageParam {
      */
     private String filename;
     /**
-     * 发送媒体资源前的提示词,会自动撤回
+     * 被at的用户id列表,用英文逗号分隔,仅type=1时有效,正文内容中要有与at的用户id对应的@xxx占位符,否则不生效
      */
-    private String prompt;
+    private String at;
+
 
     public SendMessageParam() {
     }
@@ -57,11 +58,11 @@ public class SendMessageParam {
         this.filename = filename;
     }
 
-    public String getPrompt() {
-        return prompt;
+    public String getAt() {
+        return at;
     }
 
-    public void setPrompt(String prompt) {
-        this.prompt = prompt;
+    public void setAt(String at) {
+        this.at = at;
     }
 }

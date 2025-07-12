@@ -1,26 +1,61 @@
 package io.github.cheivin.assistant.message;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import io.github.cheivin.assistant.message.ext.At;
-import io.github.cheivin.assistant.message.ext.Media;
-import io.github.cheivin.assistant.message.ext.Quote;
-import io.github.cheivin.assistant.message.ext.Revoke;
+import io.github.cheivin.assistant.message.ext.*;
 
 public class Message extends BaseMessage {
+    /**
+     * 正文
+     */
     private String content;
+    /**
+     * 被艾特的用户
+     */
+    private At[] ates;
+    /**
+     * 引用消息
+     */
     private Quote quote;
+    /**
+     * 撤回消息
+     */
     private Revoke revoke;
-    private At at;
+    /**
+     * 媒体消息,type=3
+     */
     private Media media;
+
+    /**
+     * 转发记录消息,type=19
+     */
+    private String title;
+    private String desc;
+    private RecordItem[] datalist;
+
+    /**
+     * 系统事件消息
+     */
     private String event;
+
+    /**
+     * 系统事件消息附加数据
+     */
     private JsonNode data;
 
     public String getContent() {
-        return content == null ? "" : content;
+        return content;
     }
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public At[] getAtes() {
+        return ates;
+    }
+
+    public void setAtes(At[] ates) {
+        this.ates = ates;
     }
 
     public Quote getQuote() {
@@ -39,20 +74,36 @@ public class Message extends BaseMessage {
         this.revoke = revoke;
     }
 
-    public At getAt() {
-        return at;
-    }
-
-    public void setAt(At at) {
-        this.at = at;
-    }
-
     public Media getMedia() {
         return media;
     }
 
     public void setMedia(Media media) {
         this.media = media;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public RecordItem[] getDatalist() {
+        return datalist;
+    }
+
+    public void setDatalist(RecordItem[] datalist) {
+        this.datalist = datalist;
     }
 
     public String getEvent() {
@@ -91,26 +142,9 @@ public class Message extends BaseMessage {
         } else {
             msg.setParameter("");
         }
+        msg.setAtes(getAtes());
+        msg.setQuote(getQuote());
         return msg;
     }
 
-    @Override
-    public String toString() {
-        return "Message{" +
-                "content='" + content + '\'' +
-                ", quote=" + quote +
-                ", revoke=" + revoke +
-                ", at=" + at +
-                ", media=" + media +
-                ", event='" + event + '\'' +
-                ", data=" + data +
-                ", msgID='" + msgID + '\'' +
-                ", msgType=" + msgType +
-                ", gid='" + gid + '\'' +
-                ", groupName='" + groupName + '\'' +
-                ", uid='" + uid + '\'' +
-                ", username='" + username + '\'' +
-                ", time=" + time +
-                '}';
-    }
 }

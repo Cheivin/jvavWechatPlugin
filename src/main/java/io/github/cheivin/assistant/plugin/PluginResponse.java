@@ -13,10 +13,11 @@ public class PluginResponse {
      * 文件名称
      */
     private String filename;
+
     /**
-     * 发送媒体资源前的提示词,会自动撤回
+     * 被at的用户id列表,仅type=1时有效,正文内容中要有与at的用户id对应的@xxx占位符,否则不生效
      */
-    private String prompt;
+    private String[] at;
 
     public PluginResponse() {
     }
@@ -29,59 +30,44 @@ public class PluginResponse {
         return text(error);
     }
 
-    public static PluginResponse text(String body) {
+    public static PluginResponse text(String body, String... at) {
         PluginResponse response = new PluginResponse();
         response.setType(1);
         response.setBody(body);
+        response.setAt(at);
         return response;
     }
 
     public static PluginResponse image(String uri, String filename) {
-        return PluginResponse.image(uri, filename, null);
-    }
-
-    public static PluginResponse image(String uri, String filename, String prompt) {
         PluginResponse response = new PluginResponse();
         response.setType(2);
         response.setBody(uri);
         response.setFilename(filename);
-        response.setPrompt(prompt);
         return response;
     }
 
     public static PluginResponse video(String uri, String filename) {
-        return PluginResponse.video(uri, filename, null);
-    }
-
-    public static PluginResponse video(String uri, String filename, String prompt) {
         PluginResponse response = new PluginResponse();
         response.setType(3);
         response.setBody(uri);
         response.setFilename(filename);
-        response.setPrompt(prompt);
         return response;
     }
 
     public static PluginResponse file(String uri, String filename) {
-        return PluginResponse.file(uri, filename, null);
-    }
-
-    public static PluginResponse file(String uri, String filename, String prompt) {
         PluginResponse response = new PluginResponse();
         response.setType(4);
         response.setBody(uri);
         response.setFilename(filename);
-        response.setPrompt(prompt);
         return response;
     }
 
     @Override
     public String toString() {
         return "PluginResponse{" +
-                ", type=" + type +
+                "type=" + type +
                 ", body='" + body + '\'' +
                 ", filename='" + filename + '\'' +
-                ", prompt='" + prompt + '\'' +
                 '}';
     }
 
@@ -109,11 +95,11 @@ public class PluginResponse {
         this.filename = filename;
     }
 
-    public String getPrompt() {
-        return prompt;
+    public String[] getAt() {
+        return at;
     }
 
-    public void setPrompt(String prompt) {
-        this.prompt = prompt;
+    public void setAt(String[] at) {
+        this.at = at;
     }
 }

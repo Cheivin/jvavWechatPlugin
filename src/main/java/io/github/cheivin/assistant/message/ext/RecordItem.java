@@ -3,18 +3,12 @@ package io.github.cheivin.assistant.message.ext;
 import java.util.Arrays;
 
 /**
- * 引用消息
+ * 转发聊天记录
  */
-public class Quote {
-    private String msgID;
-    private String uid;
+public class RecordItem {
     private String name;
-    private boolean bot;
+    private int time;
     private String content;
-    /**
-     * 19为转发聊天记录
-     */
-    private int type;
     /**
      * 引用的媒体,type=3
      */
@@ -27,27 +21,10 @@ public class Quote {
      * 小程序信息
      */
     private AppBrandItem appBrand;
-
     /**
      * 转发的聊天记录
      */
     private RecordItem[] record;
-
-    public String getMsgID() {
-        return msgID;
-    }
-
-    public void setMsgID(String msgID) {
-        this.msgID = msgID;
-    }
-
-    public String getUid() {
-        return uid;
-    }
-
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
 
     public String getName() {
         return name;
@@ -57,12 +34,12 @@ public class Quote {
         this.name = name;
     }
 
-    public boolean isBot() {
-        return bot;
+    public int getTime() {
+        return time;
     }
 
-    public void setBot(boolean bot) {
-        this.bot = bot;
+    public void setTime(int time) {
+        this.time = time;
     }
 
     public String getContent() {
@@ -71,14 +48,6 @@ public class Quote {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
     }
 
     public Media getMedia() {
@@ -115,13 +84,10 @@ public class Quote {
 
     @Override
     public String toString() {
-        return "Quote{" +
-                "msgID='" + msgID + '\'' +
-                ", uid='" + uid + '\'' +
-                ", name='" + name + '\'' +
-                ", bot=" + bot +
+        return "RecordItem{" +
+                "name='" + name + '\'' +
+                ", time=" + time +
                 ", content='" + content + '\'' +
-                ", type=" + type +
                 ", media=" + media +
                 ", web=" + web +
                 ", appBrand=" + appBrand +

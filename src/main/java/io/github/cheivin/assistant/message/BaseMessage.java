@@ -1,14 +1,14 @@
 package io.github.cheivin.assistant.message;
 
 public class BaseMessage {
-    public String msgID;
-    public int msgType;
-    public String gid;
-    public String groupName;
-    public String uid;
-    public String username;
-    private String wechatName;
-    public long time;
+    protected String msgID;
+    protected int msgType;
+    protected String gid;
+    protected String groupName;
+    protected String uid;
+    protected String username;
+    protected String wechatName;
+    protected long time;
 
 
     public String getMsgID() {

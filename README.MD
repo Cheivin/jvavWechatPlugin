@@ -3,14 +3,15 @@
 ## 安装
 
 ```xml
+
 <dependency>
     <groupId>io.github.cheivin</groupId>
     <artifactId>jvavwechatplugin</artifactId>
-    <version>1.0.1</version>
+    <version>2.0.0</version>
 </dependency>
 ```
 
-### mqtt协议客户端示例
+### sse协议客户端示例
 
 ```java
 
@@ -19,18 +20,16 @@ import io.github.cheivin.assistant.message.Message;
 import io.github.cheivin.assistant.plugin.AbstractPluginHandler;
 import io.github.cheivin.assistant.plugin.PluginRequest;
 import io.github.cheivin.assistant.plugin.PluginResponse;
-import io.github.cheivin.assistant.protocol.mqtt.MQTTMessageClient;
-import org.eclipse.paho.mqttv5.common.MqttException;
+import io.github.cheivin.assistant.protocol.sse.SSEMessageClient;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 
-public class MQTTMessageListenerTest {
-    public static void main(String[] args) throws MqttException {
-        MQTTMessageClient client = new MQTTMessageClient("tcp://127.0.0.1:1883", "username", "password");
-
+public class WebSocketMessageListenerTest {
+    public static void main(String[] args) {
+        SSEMessageClient client = new SSEMessageClient("http://127.0.0.1:8080/sse", "plugin", "plugin");
         ExampleHandler handler = new ExampleHandler().addPlugin(new AbstractPluginHandler(client.getSender()) {
             @Override
             public List<String> getCommands() {
@@ -107,7 +106,7 @@ import java.util.concurrent.CountDownLatch;
 
 public class WebSocketMessageListenerTest {
     public static void main(String[] args) throws InterruptedException {
-        WebSocketMessageClient client = new WebSocketMessageClient("ws://127.0.0.1:8080", "username", "password");
+        WebSocketMessageClient client = new WebSocketMessageClient("ws://127.0.0.1:8080/ws", "username", "password");
         ExampleHandler handler = new ExampleHandler().addPlugin(new AbstractPluginHandler(client.getSender()) {
             @Override
             public List<String> getCommands() {

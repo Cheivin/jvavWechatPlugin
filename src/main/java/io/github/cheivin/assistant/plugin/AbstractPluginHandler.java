@@ -22,7 +22,6 @@ public abstract class AbstractPluginHandler implements ICommandHandler {
             PluginResponse response = handle(new PluginRequest(command, parameters, message));
             if (response == null) {
                 return false;
-            } else {
             }
             switch (response.getType()) {
                 case 0:
@@ -31,21 +30,20 @@ public abstract class AbstractPluginHandler implements ICommandHandler {
                     }
                     return true; // 不回复/错误
                 case 1:
-                    messageSender.sendTextMsgByGId(message.getGid(), response.getBody());
+                    messageSender.sendTextMsgByGId(message.getGid(), response.getBody(), response.getAt());
                     return true; // 文本
 
                 case 2:
-                    messageSender.sendImageMsgByGId(message.getGid(), response.getBody(), response.getFilename(), response.getPrompt());
+                    messageSender.sendImageMsgByGId(message.getGid(), response.getBody(), response.getFilename());
                     return true; // 图片
 
                 case 3:
-                    messageSender.sendVideoMsgByGId(message.getGid(), response.getBody(), response.getFilename(), response.getPrompt());
+                    messageSender.sendVideoMsgByGId(message.getGid(), response.getBody(), response.getFilename());
                     return true; // 视频
 
                 case 4:
-                    messageSender.sendFileMsgByGId(message.getGid(), response.getBody(), response.getFilename(), response.getPrompt());
+                    messageSender.sendFileMsgByGId(message.getGid(), response.getBody(), response.getFilename());
                     return true; // 文件
-
                 case -1:// 不处理
                     return false;
                 default:
